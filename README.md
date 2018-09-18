@@ -10,4 +10,6 @@ convert images/gopher.ppm -colorspace gray -scale 500x500 pgm:- > images/gopher.
 
 ## 参考サイト
 
-- [PNM フィイルフォーマット](https://www.mm2d.net/main/prog/c/image_io-01.html)
+- [碧色工房](https://www.mm2d.net/main/prog/c/image_io-01.html)
+
+- [PGM 仕様](http://netpbm.sourceforge.net/doc/pgm.html)

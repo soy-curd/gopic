@@ -1,13 +1,60 @@
-# go image processing for learning
+# 画像ファイルを読み込んでみよう
 
-## PGM(portable graymap format)の作成
+## ダンプする
+
+golang を用いると、簡単に画像のダンプを見ることができます。[こちら](https://github.com/soy-curd/gopic/blob/master/images/gopher.pgm)からダウンロードした画像の、中身を見ていきましょう。
+
+```src/read/read.go
 
 ```
-brew install imagemagic
-convert images/gopher.ppm -colorspace gray -compress none -scale 500x500 pgm:- > images/gopher.pgm # P2 pgm(テキスト形式)
-convert images/gopher.ppm -colorspace gray -scale 500x500 pgm:- > images/gopher.pgm # P5 pgm(バイナリ形式)
+
+こちらを実行すると、
+
+```
+00000000  50 35 0a 23 20 38 2d 62  69 74 20 70 70 6d 20 52  |P5.# 8-bit ppm R|
+00000010  47 42 0a 35 30 30 20 35  30 30 0a 32 35 35 0a ff  |GB.500 500.255..|
+00000020  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+....|
 ```
 
-## 参考サイト
+のようなダンプが出力されます。
 
-- [PNM フィイルフォーマット](https://www.mm2d.net/main/prog/c/image_io-01.html)
+この画像は PGM（portable gray map）ファイルフォーマットで、ヘッダー部の後に画像の画素の階調値のデータが続く構造となっています。
+
+ヘッダー部は上記の画像の場合、
+
+```
+P5
+# 8-bit ppm RGB
+500 500
+255
+```
+
+の部分で、それぞれ PGM の形式マジックナンバー（P5 は白黒画像のバイナリ形式）、コメント、幅・高さのサイズ、階調値の最大値、となります。
+
+続く画素のデータについては、ダンプを見ると ff ff ff ...と連続しているのがわかります。PGM のバイナリ形式は 1byte を 1 画素とするので、ff は 255 を示します。階調数は明るさの段階を示し、画素は左上から右に向かって並んでいるので、この画像の左上端は最も明るい白ということになります。（実際に pgm のフォーマットが開ける画像ビューワで確認してみてください）
+
+## 画像をパースする
+
+画像処理を行うためには、プログラムで取扱いやすい形で画像を読み込む必要があります。
+
+画像は 1 ファイルを、以下の構造体に格納することとします。
+
+```
+type Pgm struct {
+	width  int
+	height int
+	size   int  // width * height
+	tone   int
+	data   [][]byte
+}
+```
+
+ここで、tone は階調値、data は２次元スライスとして格納します。
+
+## 画像を保存する
+
+
+## ★
+
+次の章では、実際に読み出した画像を様々な方法で変換していきます。
