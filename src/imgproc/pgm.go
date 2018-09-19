@@ -1,4 +1,4 @@
-package main
+package imgproc
 
 import (
 	"bytes"
@@ -30,8 +30,8 @@ func Dump(filepath string) []byte {
 	return data
 }
 
-// ParsePgm get image structure
-func ParsePgm(data []byte) Pgm {
+// DecodePgm get image structure
+func DecodePgm(data []byte) Pgm {
 	image := Pgm{}
 
 	buf := bytes.NewReader(data)
@@ -50,8 +50,8 @@ func ParsePgm(data []byte) Pgm {
 	return image
 }
 
-// MakePgmBytes make pgm image
-func MakePgmBytes(image Pgm) []byte {
+// EncodePgm make pgm image
+func EncodePgm(image Pgm) []byte {
 	var buf bytes.Buffer
 	buf.Write([]byte("P5\n"))
 	buf.Write([]byte(strconv.Itoa(image.width) + " "))
@@ -118,17 +118,4 @@ func getNextInt(buf *bytes.Reader) int {
 		panic(err)
 	}
 	return intValue
-}
-
-func main() {
-	Dump("images/gopher.pgm")
-	data, err := ioutil.ReadFile("images/gopher.pgm")
-	if err != nil {
-		panic(err)
-	}
-
-	image := ParsePgm(data)
-	out := MakePgmBytes(image)
-	ioutil.WriteFile("images/gopher_out.pgm", out, 0666)
-	fmt.Println(image)
 }
