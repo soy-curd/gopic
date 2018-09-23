@@ -18,7 +18,7 @@ type Pgm struct {
 	data   [][]byte
 }
 
-// Dump print hexdump
+// Dump prints hexdump
 func Dump(filepath string) []byte {
 	data, err := ioutil.ReadFile(filepath)
 	if err != nil {
@@ -30,56 +30,50 @@ func Dump(filepath string) []byte {
 	return data
 }
 
-// DecodePgm get image structure
+// DecodePgm gets image structure
 func DecodePgm(data []byte) Pgm {
-	image := Pgm{}
+	img := Pgm{}
 
 	buf := bytes.NewReader(data)
 	getNextToken(buf) // not used
-	image.width = getNextInt(buf)
-	image.height = getNextInt(buf)
-	image.size = image.width * image.height
-	image.tone = getNextInt(buf)
-	image.data = [][]byte{}
+	img.width = getNextInt(buf)
+	img.height = getNextInt(buf)
+	img.size = img.width * img.height
+	img.tone = getNextInt(buf)
+	img.data = [][]byte{}
 	imageBytes := make([]byte, buf.Len())
 	buf.Read(imageBytes)
 
-	for i := 0; i < image.height; i++ {
-		image.data = append(image.data, imageBytes[i*image.width:(i+1)*image.width])
+	for i := 0; i < img.height; i++ {
+		img.data = append(img.data, imageBytes[i*img.width:(i+1)*img.width])
 	}
-	return image
+	return img
 }
 
-// EncodePgm make pgm image
-func EncodePgm(image Pgm) []byte {
+// EncodePgm makes pgm img
+func EncodePgm(img Pgm) []byte {
 	var buf bytes.Buffer
 	buf.Write([]byte("P5\n"))
-	buf.Write([]byte(strconv.Itoa(image.width) + " "))
-	buf.Write([]byte(strconv.Itoa(image.height) + "\n"))
-	buf.Write([]byte(strconv.Itoa(image.tone) + "\n"))
-	for i := 0; i < image.height; i++ {
-		buf.Write(image.data[i])
+	buf.Write([]byte(strconv.Itoa(img.width) + " "))
+	buf.Write([]byte(strconv.Itoa(img.height) + "\n"))
+	buf.Write([]byte(strconv.Itoa(img.tone) + "\n"))
+	for i := 0; i < img.height; i++ {
+		buf.Write(img.data[i])
 	}
 	return buf.Bytes()
 }
 
-func getNextNonSpaceChar(buf *bytes.Reader) byte {
-	comment := false
+func getNextNonSpaceChar(reader *bytes.Reader) byte {
 	var b byte
 	var err error
 	for {
-		b, err = buf.ReadByte()
+		b, err = reader.ReadByte()
 		if err != nil {
 			break
 		}
-		if comment {
-			if b == '\n' {
-				comment = false
-			}
-			continue
-		}
+		// skip comment line
 		if b == '#' {
-			comment = true
+			skipUntilLineReturn(reader)
 			continue
 		}
 
@@ -88,6 +82,18 @@ func getNextNonSpaceChar(buf *bytes.Reader) byte {
 		}
 	}
 	return b
+}
+
+func skipUntilLineReturn(reader *bytes.Reader) {
+	for {
+		b, err := reader.ReadByte()
+		if err != nil {
+			break
+		}
+		if b == '\n' {
+			break
+		}
+	}
 }
 
 func getNextToken(buf *bytes.Reader) string {

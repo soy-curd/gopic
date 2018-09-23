@@ -1,30 +1,51 @@
 package imgproc
 
-// Brighten convert image brightness
-func (image *Pgm) Brighten(shift int) {
-	for i := 0; i < image.height; i++ {
-		for j := 0; j < image.width; j++ {
-			image.data[i][j] = byte(max(int(image.data[i][j])+shift, image.tone))
+import "./util"
+
+// Brighten converts image brightness
+func (img *Pgm) Brighten(shift int) {
+	for i := 0; i < img.height; i++ {
+		for j := 0; j < img.width; j++ {
+			img.data[i][j] = byte(util.Min(int(img.data[i][j])+shift, img.tone))
 		}
 	}
 }
 
-// Flip horizontal
-func (image *Pgm) Flip() {
+// Flip flips image horizontal
+func (img *Pgm) Flip() {
 	var fliped [][]byte
 
-	for i := 0; i < image.height; i++ {
+	for i := 0; i < img.height; i++ {
 		fliped = append(fliped, []byte{})
-		for j := 0; j < image.width; j++ {
-			fliped[i] = append(fliped[i], image.data[i][image.width-j-1])
+		for j := 0; j < img.width; j++ {
+			fliped[i] = append(fliped[i], img.data[i][img.width-j-1])
 		}
 	}
-	image.data = fliped
+	img.data = fliped
 }
 
-func max(a, b int) int {
-	if a < b {
-		return a
+// Reverse reverses image tone
+func (img *Pgm) Reverse() {
+	for i := 0; i < img.height; i++ {
+		for j := 0; j < img.width; j++ {
+			img.data[i][j] = byte(img.tone - int(img.data[i][j]))
+		}
 	}
-	return b
+}
+
+// Enlarge converts image size double
+func (img *Pgm) Enlarge() {
+	var resized [][]byte
+	var scale = 2
+
+	for i := 0; i < img.height*scale; i++ {
+		resized = append(resized, []byte{})
+		for j := 0; j < img.width*scale; j++ {
+			resized[i] = append(resized[i], img.data[i/scale][j/scale])
+		}
+	}
+	img.width = img.width * scale
+	img.height = img.height * scale
+	img.size = img.width * img.height
+	img.data = resized
 }
