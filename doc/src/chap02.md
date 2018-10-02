@@ -4,7 +4,7 @@
 
 ## 画像を明るくする
 
-画像明るくするためには、画像の階調値を大きくすれば良いです。そのためのPgm構造体に対するメソッドを定義すると、
+画像を明るくするためには、画像の階調値を大きくすれば良いです。そのためのPgm構造体に対するメソッドを定義すると、
 
 ```golang
 func (img *Pgm) Brighten(shift int) {
@@ -16,7 +16,8 @@ func (img *Pgm) Brighten(shift int) {
 }
 
 ```
-という処理になります。ここでは2次元スライスで定義した画素データをループで回し、引数shiftを画素に追加して画像を明るくしています。画素データはbyte型のため、intにキャストしてからshiftを足しています。img.toneが階調の最大値のため、shiftを足した結果がimg.toneを超えないように両者の最小値を取っています。その結果をbyte型に再びキャストし、画素を上書きします。
+
+という処理になります。ポインタレシーバ`*Pgm`に対する処理とすることで、構造体のデータを上書きしています。ここでは2次元スライスで定義した画素データをループで回し、引数shiftを画素に追加して画像を明るくしています。画素データはbyte型のため、intにキャストしてからshiftを足しています。img.toneが階調の最大値のため、shiftを足した結果がimg.toneを超えないように両者の最小値を取っています。その結果をbyte型に再びキャストし、画素を上書きします。
 
 なお、utilパッケージは以下のように定義しています。
 
@@ -41,7 +42,9 @@ func Min(a, b int) int {
 
 ```
 
-実際にこのメソッドを使用してみると、![明るいGopherくん](./images/gopher_brighten.png)
+実際にこのメソッドを使用してみると、
+
+![明るいGopherくん](./images/gopher_brighten.png)
 
 このように明るいGopherくんが得られます。
 
@@ -80,6 +83,7 @@ func (img *Pgm) Reverse() {
 	}
 }
 ```
+
 ![白黒反転Gopherくん](./images/gopher_reverse.png)
 
 ## 画像を拡大する
@@ -104,6 +108,7 @@ func (img *Pgm) Enlarge() {
 	img.data = resized
 }
 ```
-![拡大Gopherくん](./images/gopher_enalarge.png)
+
+![拡大Gopherくん](./images/gopher_enlarge.png)
 
 以上、基本的な画像の変換処理を紹介していきました。次章ではもう少し高度な処理をしていきます。
