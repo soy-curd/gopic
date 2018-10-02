@@ -10,14 +10,14 @@ bookname: book
 booktitle: Goで画像処理
 # 著者
 aut: soy-curd
-# prt: 
+# prt:
 pbl: soy-curd
 contact: soycurd1@gmail.com
-prt_url:  http://soy-curd.hatenablog.com/
+prt_url: http://soy-curd.hatenablog.com/
 # edt: "@soycurd1"
-date: 2018-10-07
+date: 2018/10/07
 rights: (C) 2018 @soy-curd
-description:
+? description
 # 以下はオプション
 # prt: 出版社
 # asn: Associated name
