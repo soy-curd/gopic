@@ -6,7 +6,7 @@ Gopherくんというキャラクターを知っているでしょうか？
 
 
 
-//image[gopher][Gopherくん]{
+//image[gopher][Gopherくん][scale=2]{
 //}
 
 

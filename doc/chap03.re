@@ -4,7 +4,7 @@
 == 階調補正
 
 
-//image[gopher_low_contrast][薄暗いGopherくん]{
+//image[gopher_low_contrast][薄暗いGopherくん][scale=0.5]{
 //}
 
 
@@ -80,7 +80,7 @@ func (img *Pgm) Binarization(threshold int) {
 //}
 
 
-//image[gopher_binary][二値化Gopherくん]{
+//image[gopher_binary][二値化Gopherくん][scale=0.5]{
 //}
 
 
@@ -138,7 +138,7 @@ func applyError(data [][]byte, i int, j int, tone int) {
 
 
 
-//image[gopher_diff][誤差拡散Gopherくん]{
+//image[gopher_diff][誤差拡散Gopherくん][scale=0.5]{
 //}
 
 

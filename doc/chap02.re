@@ -56,7 +56,7 @@ func Min(a, b int) int {
 
 
 
-//image[gopher_brighten][明るいGopherくん]{
+//image[gopher_brighten][明るいGopherくん][scale=0.5]{
 //}
 
 
@@ -86,7 +86,7 @@ func (img *Pgm) Flip() {
 
 
 
-//image[gopher_flip][左右反転Gopherくん]{
+//image[gopher_flip][左右反転Gopherくん][scale=0.5]{
 //}
 
 
@@ -109,7 +109,7 @@ func (img *Pgm) Reverse() {
 //}
 
 
-//image[gopher_reverse][白黒反転Gopherくん]{
+//image[gopher_reverse][白黒反転Gopherくん][scale=0.5]{
 //}
 
 

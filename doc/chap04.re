@@ -57,7 +57,7 @@ calcFilter関数ではフィルターの各係数を注目画素と近傍の画�
 
 
 
-//image[gopher_laplacian][エッジ強調Gopherくん]{
+//image[gopher_laplacian][エッジ強調Gopherくん][scale=0.5]{
 //}
 
 
@@ -81,7 +81,7 @@ func (img *Pgm) PatternHorizontal() {
 
 
 
-//image[gopher_horizontal][水平方向強調Gopherくん]{
+//image[gopher_horizontal][水平方向強調Gopherくん][scale=0.5]{
 //}
 
 
