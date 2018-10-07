@@ -19,7 +19,9 @@ func (img *Pgm) CorrectTone() {
 
 	for i := 0; i < img.height; i++ {
 		for j := 0; j < img.width; j++ {
-			img.data[i][j] = byte(normalize(int(img.data[i][j]), min, max, img.tone))
+			img.data[i][j] = byte(
+				normalize(
+					int(img.data[i][j]), min, max, img.tone))
 		}
 	}
 }

@@ -20,7 +20,8 @@ func applyFilter(img *Pgm, filter [][]int, tone int) [][]byte {
 		buf = append(buf, []byte{})
 		buf[i] = append(buf[i], byte(0))
 		for j := 1; j < img.width-1; j++ {
-			buf[i] = append(buf[i], byte(calcFilter(img.data, i, j, filter, img.tone)))
+			buf[i] = append(buf[i], byte(
+			    calcFilter(img.data, i, j, filter, img.tone)))
 		}
 		buf[i] = append(buf[i], byte(0))
 	}

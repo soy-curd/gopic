@@ -30,7 +30,9 @@ func (img *Pgm) CorrectTone() {
 
 	for i := 0; i < img.height; i++ {
 		for j := 0; j < img.width; j++ {
-			img.data[i][j] = byte(normalize(int(img.data[i][j]), min, max, img.tone))
+			img.data[i][j] = byte(
+				normalize(
+					int(img.data[i][j]), min, max, img.tone))
 		}
 	}
 }
@@ -95,16 +97,24 @@ func applyError(data [][]byte, i int, j int, tone int) {
 	}
 
 	if j+1 < len(data[i]) {
-		data[i][j+1] = byte(util.Min(int(0.3*float64(error))+int(data[i][j+1]), tone))
+		data[i][j+1] = byte(util.Min(
+			int(0.3*float64(error))+int(data[i][j+1]),
+			tone))
 	}
 	if i+1 < len(data) && j > 0 {
-		data[i+1][j-1] = byte(util.Min(int(0.2*float64(error))+int(data[i+1][j-1]), tone))
+		data[i+1][j-1] = byte(util.Min(
+			int(0.2*float64(error))+int(data[i+1][j-1]),
+			tone))
 	}
 	if i+1 < len(data) {
-		data[i+1][j] = byte(util.Min(int(0.3*float64(error))+int(data[i+1][j]), tone))
+		data[i+1][j] = byte(util.Min(
+			int(0.3*float64(error))+int(data[i+1][j]),
+			tone))
 	}
 	if i+1 < len(data) && j+1 < len(data[i]) {
-		data[i+1][j+1] = byte(util.Min(int(0.3*float64(error))+int(data[i+1][j+1]), tone))
+		data[i+1][j+1] = byte(util.Min(
+			int(0.3*float64(error))+int(data[i+1][j+1]),
+			tone))
 	}
 }
 ```
