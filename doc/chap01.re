@@ -4,7 +4,7 @@
 == ダンプする
 
 
-Goを用いると、簡単に画像のダンプを見ることができます。@<href>{https://github.com/soy-curd/gopic/blob/master/images/gopher.pgm,こちら}からダウンロードした画像の、中身を見ていきましょう。
+Goを用いると、簡単に画像のダンプを見ることができます。@<strong>{こちら}(https://github.com/soy-curd/gopic/blob/master/images/gopher.pgm)からダウンロードした画像の、中身を見ていきましょう。
 
 
 //emlist[][src/imgproc/pgm.go]{
@@ -58,7 +58,7 @@ P5
 
 
 
-画像は1ファイルを、以下の構造体に格納することとします。
+画像は1ファイルにつき、以下の構造体に格納することとします。
 
 
 //emlist{
@@ -202,7 +202,7 @@ func main() {
 
 
 
-※ pgm読み込み処理は、@<href>{https://www.mm2d.net/main/prog/c/image_io-01.html,碧色工房}を参考にしました。
+※ pgm読み込み処理は、@<strong>{碧色工房様}(https://www.mm2d.net/main/prog/c/image_io-01.html)を参考にしました。
 
 
 == 画像を保存する

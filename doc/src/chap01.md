@@ -2,7 +2,7 @@
 
 ## ダンプする
 
-Goを用いると、簡単に画像のダンプを見ることができます。[こちら](https://github.com/soy-curd/gopic/blob/master/images/gopher.pgm)からダウンロードした画像の、中身を見ていきましょう。
+Goを用いると、簡単に画像のダンプを見ることができます。**こちら**(https://github.com/soy-curd/gopic/blob/master/images/gopher.pgm)からダウンロードした画像の、中身を見ていきましょう。
 
 ```src/imgproc/pgm.go
 data, _ := ioutil.ReadFile(filepath)
@@ -40,7 +40,7 @@ P5
 
 画像処理を行うためには、プログラムで取扱いやすい形で画像を読み込む必要があります。
 
-画像は1ファイルを、以下の構造体に格納することとします。
+画像は1ファイルにつき、以下の構造体に格納することとします。
 
 ```
 type Pgm struct {
@@ -178,7 +178,7 @@ func main() {
 
 ここで、getNextToken関数は読み込んだデータから最初の文字列を取り出します。この関数の中ではgetNextNonSpaceChar関数を用いて、コメントを読み飛ばしています。getNextInt関数では、getNextToken関数で得た文字列を数値に変換しています。そして、公開関数であるDecodePgm関数では、Pgmのフォーマットに従ってデータを読み込み、先程定義したPgm構造体に格納しています。
 
-※ pgm読み込み処理は、[碧色工房](https://www.mm2d.net/main/prog/c/image_io-01.html)を参考にしました。
+※ pgm読み込み処理は、**碧色工房様**(https://www.mm2d.net/main/prog/c/image_io-01.html)を参考にしました。
 
 
 ## 画像を保存する
